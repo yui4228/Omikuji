@@ -59,39 +59,25 @@
           {stars:'★★', detail:'まずまず健康運です！無理せず体を動かしましょう！'},
           {stars:'★', detail:'悪い傾向が見られます！ケガにご注意を・・・'},
         ]
-
       }
 
-      let moneyNumber = Math.floor(Math.random() * 3);
-      let workNumber = Math.floor(Math.random() * 3);
-      let healthNumber = Math.floor(Math.random() * 3);
-
-      for(let i in fortuneResult){
-        console.log('fortuneResult.' + i + ' = ' +  fortuneResult[i]);
-      }
+      let clickCount = 0;
 
       $(function(){
         $('.js-fortune-start').on('click',function(){
-          $('.money .stars').text(moneyStar);
-          $('.money .detail').text(moneyDetail);
-          $('.work .stars').text(workStar);
-          $('.work .detail').text(workDetail);
-          $('.health .stars').text(healthStar);
-          $('.health .detail').text(healthDetail);
           $('.start-button').toggleClass('again');
-          $('.result').fadeToggle(1000);
-        })
-      })
-
-
-      let moneyStar = ('stars : ' + fortuneResult['money'][moneyNumber]['stars']);
-      let moneyDetail = ('detail : ' + fortuneResult['money'][moneyNumber]['detail']);
-
-      let workStar = ('stars : ' + fortuneResult['work'][workNumber]['stars']);
-      let workDetail = ('detail : ' + fortuneResult['work'][workNumber]['detail']);
-
-      let healthStar = ('stars : ' + fortuneResult['health'][healthNumber]['stars']);
-      let healthDetail = ('detail : ' + fortuneResult['health'][healthNumber]['detail']);
+          $('.result').fadeToggle(500);
+          clickCount += 1
+          if(clickCount % 2 != 0){
+            for(let i in fortuneResult){
+              let number = Math.floor(Math.random() * 3);
+              let target = $('.' + i);
+              target.find('.stars').text(fortuneResult[i][number]['stars']);
+              target.find('.detail').text(fortuneResult[i][number]['detail']);
+            }
+          }
+        });
+      });
     </script>
   </body>
 </html>
